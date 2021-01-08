@@ -1,33 +1,24 @@
 package com.cap.service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.cap.pojo.Info;
 import com.cap.util.HtmlParseUtil;
-import org.apache.http.nio.entity.NFileEntity;
-import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.get.*;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +134,7 @@ public class InfoService {
     public int searchNum(String name) throws IOException {
         int i = 0;
         List<String> id = new ArrayList<>();
-        
+
         //条件搜索
         SearchRequest searchRequest = new SearchRequest("info");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();

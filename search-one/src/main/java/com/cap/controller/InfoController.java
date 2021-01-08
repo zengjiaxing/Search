@@ -45,7 +45,7 @@ public class InfoController {
                          @PathVariable("pageNo") int pageNo,
                          @PathVariable("pageSize") int pageSize
                          ) throws IOException{
-        if(keyword == "1"){
+        if(keyword.equals("1")){
             return "";
         }
         String infoJson = infoService.searchByName(keyword, pageNo, pageSize);
@@ -59,7 +59,7 @@ public class InfoController {
      * */
     @GetMapping("/searchNum/{keyword}")
     public int searchNum(@PathVariable("keyword") String keyword) throws IOException{
-        if(keyword == "1"){
+        if(keyword.equals("1")){
             return 0;
         }
         int num = infoService.searchNum(keyword);
