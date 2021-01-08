@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-01-08
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/comment")
+public class CommentController {
 
 }
 

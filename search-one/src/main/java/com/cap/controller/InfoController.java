@@ -2,37 +2,41 @@ package com.cap.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.cap.pojo.Info;
-import com.cap.service.InfoService;
+import com.cap.service.impl.InfoService;
+import com.cap.util.HtmlParseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 public class InfoController {
     @Autowired
+    HtmlParseUtil htmlParseUtil;
+    @Autowired
     InfoService infoService;//es操作相关封装类
-    /**
-     * 解析位于特定位置的json文件，插入es
-     * */
-    @GetMapping("/parseJson")
-    public void parseJson() throws IOException {
-        infoService.parseJson();
-    }
     /**
      * 通过给定的keyword解析百度网页获取词条数据并插入es
      * @param keyword 需要解析的关键字
      * */
     @GetMapping("/parse/{keyword}")
-    public void parse(@PathVariable("keyword") String keyword) throws IOException {
-        infoService.parseKeyword(keyword);
+    public boolean parse(@PathVariable("keyword") String keyword) throws IOException {
+        System.out.println(JSON.toJSONString(htmlParseUtil.parseBaiDu(keyword)));
+        return infoService.parseKeyword(keyword);
     }
+
+
+    /**
+     * 解析位于特定位置的json文件，插入es
+     * */
+    @GetMapping("/parseJson/{path}")
+    public void parseJson(@PathVariable("path") String path) throws IOException {
+        System.out.println(path);
+        infoService.parseJson("D:\\json\\" + path + ".json");
+    }
+
     /**
      * 通过给定的name来匹配es中的数据，返回数据
      * @param keyword 需要匹配的关键字
