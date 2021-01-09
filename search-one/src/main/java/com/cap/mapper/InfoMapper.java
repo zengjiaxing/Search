@@ -1,6 +1,6 @@
 package com.cap.mapper;
 
-import com.cap.pojo.Liked;
+import com.cap.pojo.Info;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author zjx
  * @since 2021-01-09
  */
-public interface LikedMapper extends BaseMapper<Liked> {
+public interface InfoMapper extends BaseMapper<Info> {
 
 }

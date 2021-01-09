@@ -1,8 +1,8 @@
 package com.cap.service.impl;
 
-import com.cap.pojo.Liked;
-import com.cap.mapper.LikedMapper;
-import com.cap.service.LikedService;
+import com.cap.pojo.Info;
+import com.cap.mapper.InfoMapper;
+import com.cap.service.InfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-01-09
  */
 @Service
-public class LikedServiceImpl extends ServiceImpl<LikedMapper, Liked> implements LikedService {
+public class InfoServiceImpl extends ServiceImpl<InfoMapper, Info> implements InfoService {
 
 }

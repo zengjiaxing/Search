@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author zjx
- * @since 2021-01-08
+ * @since 2021-01-09
  */
 public interface LikedService extends IService<Liked> {
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cap.mapper.InfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cap.pojo.Info">
+        <id column="info_id" property="infoId" />
+        <result column="es_id" property="esId" />
+        <result column="cn_name" property="cnName" />
+        <result column="en_name" property="enName" />
+        <result column="slug" property="slug" />
+        <result column="content" property="content" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        info_id, es_id, cn_name, en_name, slug, content
+    </sql>
+
+</mapper>

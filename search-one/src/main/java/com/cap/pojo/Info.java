@@ -1,15 +1,37 @@
 package com.cap.pojo;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author zjx
+ * @since 2021-01-09
+ */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Info {
-private String id;//id
-private String cnName;//中文名
-private String enName;//外文名
-private String content;//内容
+@EqualsAndHashCode(callSuper = false)
+public class Info implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "info_id", type = IdType.AUTO)
+    private Integer infoId;
+
+    private String esId;
+
+    private String cnName;
+
+    private String enName;
+
+    private String slug;
+
+    private String content;
+
+
 }

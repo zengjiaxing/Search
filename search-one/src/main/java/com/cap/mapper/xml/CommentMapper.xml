@@ -8,12 +8,12 @@
         <result column="user_id" property="userId" />
         <result column="entry_id" property="entryId" />
         <result column="liked_num" property="likedNum" />
-        <result column="es_id" property="esId" />
+        <result column="info_id" property="infoId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        comment_id, user_id, entry_id, liked_num, es_id
+        comment_id, user_id, entry_id, liked_num, info_id
     </sql>
 
 </mapper>

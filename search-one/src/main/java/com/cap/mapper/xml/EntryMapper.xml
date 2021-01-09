@@ -5,12 +5,12 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cap.pojo.Entry">
         <id column="entry_id" property="entryId" />
-        <result column="es_id" property="esId" />
+        <result column="info_id" property="infoId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        entry_id, es_id
+        entry_id, info_id
     </sql>
 
 </mapper>

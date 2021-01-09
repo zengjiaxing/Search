@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import java.util.Scanner;
 
 public class AutoCreate {
-    /*public static String scanner(String tip) {
+    public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder help = new StringBuilder();
         help.append("请输入" + tip + ": ");
@@ -76,5 +76,5 @@ public class AutoCreate {
 
         //生成代码
         mpg.execute();
-    }*/
+    }
 }

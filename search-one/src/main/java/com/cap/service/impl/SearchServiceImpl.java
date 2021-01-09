@@ -1,7 +1,7 @@
 package com.cap.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.cap.pojo.Info;
+import com.cap.dto.SearchData;
 import com.cap.util.HtmlParseUtil;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -29,16 +29,16 @@ import java.util.concurrent.TimeUnit;
  * @Author zengjiaxing
  */
 @Service
-public class InfoService {
+public class SearchServiceImpl {
     @Autowired
     private RestHighLevelClient restHighLevelClient;//ES操作api
+
     /**
      * 解析位于特定位置的json文件，插入es
      * @return boolean 是否解析是否成功
      * */
-
     public Boolean parseJson(String path) throws IOException {
-        List<Info> infoList = new ArrayList<>();
+        List<SearchData> infoList = new ArrayList<>();
         File file = new File(path);
         InputStream inputStream = new FileInputStream(file);
         StringBuilder sb = new StringBuilder();
@@ -48,13 +48,13 @@ public class InfoService {
             sb.append(line);
         }
         String str = new String(sb.toString());
-        infoList = JSON.parseArray(str, Info.class);
+        infoList = JSON.parseArray(str, SearchData.class);
         //System.out.println(infoList);
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout("600s");
         //把查询的数据放入es中
         for (int i = 0; i < infoList.size(); i++) {
-            bulkRequest.add(new IndexRequest("searchall","_doc","10").source(JSON.toJSONString(infoList.get(i)), XContentType.JSON));
+            bulkRequest.add(new IndexRequest("searchall").source(JSON.toJSONString(infoList.get(i)), XContentType.JSON));
         }
         BulkResponse bulk = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
         return !bulk.hasFailures();
@@ -66,11 +66,11 @@ public class InfoService {
      * @return boolean 解析是否成功
      * */
     public Boolean parseKeyword(String keyword) throws IOException {
-        Info info = new HtmlParseUtil().parseBaiDu(keyword);
+        SearchData info = new HtmlParseUtil().parseBaiDu(keyword);
         if (info.getContent().equals("") || info.getContent().isEmpty()) {
             return false;
         }
-        List<Info> infoList = new ArrayList<>();
+        List<SearchData> infoList = new ArrayList<>();
         infoList.add(info);
         //把查询的数据放入es中
         BulkRequest bulkRequest = new BulkRequest();
@@ -116,11 +116,11 @@ public class InfoService {
             infos.add(searchHit.getSourceAsMap());
         }
 
-        List<Info> infoList = new ArrayList<>();
+        List<SearchData> infoList = new ArrayList<>();
         for (Map<String, Object> map : infos) {
             String jsonString = JSON.toJSONString(map);
-            infoList.add(JSON.parseObject(jsonString, Info.class));
-            infoList.get(i++).setId(id.get(i - 1));
+            infoList.add(JSON.parseObject(jsonString, SearchData.class));
+            infoList.get(i++).setEsId(id.get(i - 1));
 
         }
         String infoJson = JSON.toJSONString(infoList);
@@ -180,11 +180,11 @@ public class InfoService {
                 System.out.println("没有查询到相应文档");
             }
         }
-        List<Info> infoList = new ArrayList<>();
+        List<SearchData> infoList = new ArrayList<>();
         for (Map<String, Object> map : infos) {
             String jsonString = JSON.toJSONString(map);
-            infoList.add(JSON.parseObject(jsonString, Info.class));
-            infoList.get(j++).setId(id.get(j - 1));
+            infoList.add(JSON.parseObject(jsonString, SearchData.class));
+            infoList.get(j++).setEsId(id.get(j - 1));
         }
         String infoJson = JSON.toJSONString(infoList);
         return infoJson;

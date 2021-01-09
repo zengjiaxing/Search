@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author zjx
- * @since 2021-01-08
+ * @since 2021-01-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,7 +27,7 @@ public class User implements Serializable {
 
     private String password;
 
-    private Integer core;
+    private Integer score;
 
 
 }

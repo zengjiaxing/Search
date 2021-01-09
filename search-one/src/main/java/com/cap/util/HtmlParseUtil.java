@@ -1,20 +1,18 @@
 package com.cap.util;
 
-import com.cap.pojo.Info;
+import com.cap.dto.SearchData;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+
 @Service
 public class HtmlParseUtil {
-    public Info parseBaiDu(String keywords) throws IOException {
+    public SearchData parseBaiDu(String keywords) throws IOException {
         //获取请求
         //需要联网
         String url = "https://baike.baidu.com/item/"+keywords;
@@ -24,7 +22,7 @@ public class HtmlParseUtil {
 
         //所有在js中可以使用的方法，这里都能用！
         Elements elements = document.getElementsByClass("lemma-summary");
-        Info info = new Info();
+        SearchData info = new SearchData();
         String text = "";
         for (Element el : elements)
         {
@@ -54,26 +52,14 @@ public class HtmlParseUtil {
                     info.setEnName(elementsDd.eq(i).text());
                     System.out.println(elementsDd.eq(i).text());
                 }
+                if(elementsDt.eq(i).text().startsWith("缩"))
+                {
+                    info.setSlug(elementsDd.eq(i).text());
+                    System.out.println(elementsDd.eq(i).text());
+                }
             }
         }
 
-
-
-        /*Elements elementsTwo = document.getElementsByClass("reference-item reference-item--type1 ");
-        //System.out.println(elementsTwo);
-        List<Literature> literatureList = new ArrayList<>();
-        for (Element el : elementsTwo) {
-            Elements elementsText = el.getElementsByClass("text");
-            String bookName = elementsText.eq(0).text();
-            String bookUrl = "https://baike.baidu.com"+elementsText.eq(0).attr("href");
-            System.out.println(bookName);
-            System.out.println(bookUrl);
-            Elements elementsAuthor = el.getElementsByClass("site");
-            String author = elementsAuthor.text().substring(1);
-            System.out.println(author);
-            Literature literature = new Literature(bookName,author,bookUrl);
-            literatureList.add(literature);
-        }*/
         if (info.getCnName() == null)
         {
             info.setCnName("");
@@ -82,23 +68,19 @@ public class HtmlParseUtil {
         {
             info.setEnName("");
         }
+        if (info.getSlug() == null)
+        {
+            info.setSlug("");
+        }
         if (info.getContent() == null)
         {
             info.setContent("");
         }
-        /*if (literatureList == null)
-        {
-            Literature temp = new Literature("","","");
-            literatureList.add(temp);
-        }*/
-        //tags
-        /*List<String> tags = new ArrayList<>();
-        tags.add("");
-        info.setTags(tags);
-        info.setLiteratureList(literatureList);*/
+
+
         return info;
     }
-    public Info parseWiKi(String keywords) throws IOException {
+    public SearchData parseWiKi(String keywords) throws IOException {
         //获取请求
         //需要联网
         String url = "https://zh.wikipedia.org/wiki/"+keywords;
@@ -108,7 +90,7 @@ public class HtmlParseUtil {
 
         //所有在js中可以使用的方法，这里都能用！
         Elements elements = document.getElementsByClass("lemma-summary");
-        Info info = new Info();
+        SearchData info = new SearchData();
         String text = "";
         for (Element el : elements)
         {
