@@ -6,13 +6,14 @@
     <resultMap id="BaseResultMap" type="com.cap.pojo.User">
         <id column="user_id" property="userId" />
         <result column="username" property="username" />
-        <result column="password" property="password" />
+        <result column="pwd" property="pwd" />
+        <result column="password_salt" property="passwordSalt" />
         <result column="score" property="score" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id, username, password, score
+        user_id, username, pwd, password_salt, score
     </sql>
 
 </mapper>

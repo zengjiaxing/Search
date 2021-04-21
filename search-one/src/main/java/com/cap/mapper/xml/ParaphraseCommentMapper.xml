@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cap.mapper.ParaphraseCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cap.pojo.ParaphraseComment">
+        <id column="paraphrase_comment_id" property="paraphraseCommentId" />
+        <result column="user_id" property="userId" />
+        <result column="paraphrase_comment" property="paraphraseComment" />
+        <result column="comment_date" property="comment_date" />
+        <result column="like_num" property="likeNum" />
+        <result column="paraphrase_id" property="paraphraseId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        paraphrase_comment_id, user_id, paraphrase_comment, comment_date, like_num, paraphrase_id
+    </sql>
+    <select id="getById" resultType="com.cap.dto.ParaphraseCommentDTO">
+        select p.paraphrase_comment_id as paraphraseCommentId,
+               p.user_id as userId,
+               p.paraphrase_comment as paraphraseComment,
+               p.comment_date as commentDate,
+               p.like_num as likeNum,
+               p.paraphrase_id as paraphraseId,
+               u.username as username,
+               (select count(*) from paraphrase_comment_like c where c.paraphrase_comment_id = p.paraphrase_comment_id and c.user_id = userId) as sign
+        from paraphrase_comment p left join user u
+            on p.user_id = u.user_id
+        where p.paraphrase_id = #{paraphraseId}
+    </select>
+</mapper>

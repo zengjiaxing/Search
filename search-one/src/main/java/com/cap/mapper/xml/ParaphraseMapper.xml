@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cap.mapper.ParaphraseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cap.pojo.Paraphrase">
+        <id column="paraphrase_id" property="paraphraseId" />
+        <result column="info_id" property="infoId" />
+        <result column="paraphrase_title" property="paraphraseTitle" />
+        <result column="paraphrase_content" property="paraphraseContent" />
+        <result column="order_p" property="orderP" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        paraphrase_id, info_id, paraphrase_title, paraphrase_content, order_p
+    </sql>
+
+</mapper>

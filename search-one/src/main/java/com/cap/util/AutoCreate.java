@@ -46,7 +46,7 @@ public class AutoCreate {
 
         //数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/searchmore?useSSL=false&useUnicode=true&characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://1.15.56.11:3306/search?useSSL=false&useUnicode=true&characterEncoding=utf-8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("zjx347320623.");

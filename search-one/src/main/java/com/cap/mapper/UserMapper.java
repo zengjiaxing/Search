@@ -2,6 +2,8 @@ package com.cap.mapper;
 
 import com.cap.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -9,8 +11,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author zjx
- * @since 2021-01-09
+ * @since 2021-03-05
  */
+@Mapper
+@Repository
 public interface UserMapper extends BaseMapper<User> {
 
 }
